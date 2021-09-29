@@ -30,8 +30,12 @@ public class ProductsRepoImpl implements ProductsRepo
 	}
 
 
+	@Override
+	public boolean updateProduct(Products product) {
+		eMan.merge(product);
+		return true;
+	}
 
-	
 
 
 }

@@ -24,8 +24,8 @@ public class ProductsServiceImpl implements ProductsService
 
 	@Override
 	public List<Products> getProducts() {
-		return prepo.getProducts();
-//		return jpaRepo.findAll();
+//		return prepo.getProducts();
+		return jpaRepo.findAll();
 	}
 
 
@@ -33,6 +33,28 @@ public class ProductsServiceImpl implements ProductsService
 	@Override
 	public boolean addProduct(Products product) {
 		return prepo.addProduct(product);
+	}
+
+
+
+	@Override
+	public boolean updateProduct(Products product) {
+		return prepo.updateProduct(product);
+	}
+
+
+
+	@Override
+	public Products searchProductbyID(String pid) {
+		return jpaRepo.findById(pid).get();
+	}
+
+
+
+	@Override
+	public boolean deleteProductbyID(String pid) {
+		jpaRepo.deleteById(pid);
+		return true;
 	}
 
 	

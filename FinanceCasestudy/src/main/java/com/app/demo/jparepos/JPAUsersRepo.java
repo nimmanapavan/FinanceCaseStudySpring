@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.app.demo.pojo.Products;
 import com.app.demo.pojo.Users;
 
-public interface MyJPARepo extends JpaRepository<Products, String>
+public interface JPAUsersRepo extends JpaRepository<Users,String>
 {
-	
+	@Query("select v from Users v where v.approval_status LIKE '%no%'")
+	public List<Users> getnonapprovedusers();
+
 }

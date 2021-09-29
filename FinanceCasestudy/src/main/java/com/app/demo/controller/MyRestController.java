@@ -14,15 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.demo.pojo.Products;
+import com.app.demo.pojo.Users;
 import com.app.demo.service.ProductsService;
+import com.app.demo.service.UserService;
 
 @RestController
 @RequestMapping("/fms")
-@CrossOrigin(origins="http://localhost:4200")
 public class MyRestController 
 {
 	@Autowired
 	ProductsService pService;
+	
+	@Autowired
+	UserService uService;
 	
 	@GetMapping("/products")
 	public List<Products> getAllProducts()
@@ -36,4 +40,47 @@ public class MyRestController
 	{
 		return pService.addProduct(product);
 	}
+	
+	@PutMapping("/products")
+	public boolean updateProducts(@RequestBody Products product)
+	{
+		return pService.updateProduct(product);
+	}
+	
+	@GetMapping("/products/{product_id}")
+	public Products getVehiclebyNo(@PathVariable(name="product_id") String vNo)
+	{
+		return pService.searchProductbyID(vNo);
+	}
+	
+	@DeleteMapping("/products/{product_id}")
+	public boolean deleteProductbtID(@PathVariable(name="product_id") String vNo)
+	{
+		return pService.deleteProductbyID(vNo);
+	}
+	@GetMapping("/users")
+	public List<Users> getAllUsers()
+	{
+		return uService.getUsers();
+	}
+	
+	@GetMapping("/users/{user_id}")
+	public Users getUserbyID(@PathVariable(name="user_id") String vNo)
+	{
+		return uService.getUserbyID(vNo);
+	}
+	
+	@PutMapping("/users")
+	public boolean updateUsers(@RequestBody Users user)
+	{
+		return uService.updateUser(user);
+	}
+	
+	@GetMapping("/users/not approved")
+	public List<Users> getUsersforApproval()
+	{
+		return uService.getUsersforApproval();
+	}
+	
+	
 }

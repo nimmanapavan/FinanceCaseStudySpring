@@ -8,4 +8,5 @@ public interface ProductsRepo
 {
 	public List<Products> getProducts();
 	public boolean addProduct(Products product);
+	public boolean updateProduct(Products product);
 }
