@@ -11,5 +11,9 @@ public interface JPAUsersRepo extends JpaRepository<Users,String>
 {
 	@Query("select v from Users v where v.approval_status LIKE '%no%'")
 	public List<Users> getnonapprovedusers();
+	
+	@Query("select u.user_id from Users u")
+	public List<String> getalluserid();
 
+	
 }

@@ -41,4 +41,16 @@ public class UserServiceImpl implements UserService
 		return jpaRepo.getnonapprovedusers();
 	}
 
+	@Override
+	public boolean addUser(Users user) {
+		jpaRepo.save(user);
+		return true;
+	}
+
+	@Override
+	public List<String> getallUserid() {
+		return jpaRepo.getalluserid();
+	}
+
+
 }

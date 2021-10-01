@@ -20,7 +20,7 @@ public class FinanceCasestudyApplication {
           return new WebMvcConfigurerAdapter() {
              @Override
              public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/rest").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/*").allowedOrigins("/*").allowedMethods("*").allowedHeaders("*");
              }
           };
        }

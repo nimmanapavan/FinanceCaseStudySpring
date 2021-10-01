@@ -1,8 +1,12 @@
 package com.app.demo.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +16,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.app.demo.pojo.Prodimage;
 import com.app.demo.pojo.Products;
 import com.app.demo.pojo.Users;
+import com.app.demo.service.AddressService;
+import com.app.demo.service.BankService;
 import com.app.demo.service.ProductsService;
 import com.app.demo.service.UserService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/fms")
 public class MyRestController 
 {
@@ -27,6 +36,12 @@ public class MyRestController
 	
 	@Autowired
 	UserService uService;
+	
+	@Autowired
+	BankService bService;
+	
+	@Autowired
+	AddressService aService;
 	
 	@GetMapping("/products")
 	public List<Products> getAllProducts()
@@ -76,11 +91,50 @@ public class MyRestController
 		return uService.updateUser(user);
 	}
 	
+	@PostMapping("/users")
+	public boolean addUsers(@RequestBody Users user)
+	{
+		return uService.addUser(user);
+	}
+	
 	@GetMapping("/users/not approved")
 	public List<Users> getUsersforApproval()
 	{
 		return uService.getUsersforApproval();
 	}
+	
+	@PostMapping("/prodimg")
+	public boolean upload(@RequestBody Prodimage img) {
+		String imageUploadLocation = "C:/Users/nimmana pavan/Desktop/New folder";
+		String fileName = img.getProd_img().getOriginalFilename();
+		String targetFile = imageUploadLocation + fileName;
+		try {
+			FileCopyUtils.copy(img.getProd_img().getInputStream(), new FileOutputStream(targetFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	@GetMapping("/alluserid")
+	public List<String> getalluserid()
+	{
+		return uService.getallUserid();
+	}
+	
+	@GetMapping("/allpincodes")
+	public List<Long> getallpincodes()
+	{
+		return aService.getallpincodes();
+	}
+	
+	@GetMapping("/allifsc")
+	public List<String> getallifsc()
+	{
+		return bService.getallifsc();
+	}
+	
 	
 	
 }
