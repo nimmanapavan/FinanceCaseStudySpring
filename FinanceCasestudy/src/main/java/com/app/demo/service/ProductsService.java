@@ -11,4 +11,6 @@ public interface ProductsService
 	public boolean updateProduct(Products product);
 	public Products searchProductbyID(String pid);
 	public boolean deleteProductbyID(String pid);
+	
+	public Products getsingleProduct();
 }

@@ -57,6 +57,13 @@ public class ProductsServiceImpl implements ProductsService
 		return true;
 	}
 
+
+
+	@Override
+	public Products getsingleProduct() {
+		return jpaRepo.getsingleProduct();
+	}
+
 	
 
 }

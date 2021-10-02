@@ -10,5 +10,6 @@ import com.app.demo.pojo.Users;
 
 public interface MyJPARepo extends JpaRepository<Products, String>
 {
-	
+	@Query("select p from Products p where rownum=1")
+	public Products getsingleProduct();
 }

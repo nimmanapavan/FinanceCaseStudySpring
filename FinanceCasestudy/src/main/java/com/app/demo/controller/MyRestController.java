@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.demo.pojo.Orders;
 import com.app.demo.pojo.Prodimage;
 import com.app.demo.pojo.Products;
 import com.app.demo.pojo.Users;
 import com.app.demo.service.AddressService;
 import com.app.demo.service.BankService;
+import com.app.demo.service.OrderService;
 import com.app.demo.service.ProductsService;
 import com.app.demo.service.UserService;
 
@@ -42,6 +44,9 @@ public class MyRestController
 	
 	@Autowired
 	AddressService aService;
+	
+	@Autowired
+	OrderService oService;
 	
 	@GetMapping("/products")
 	public List<Products> getAllProducts()
@@ -63,7 +68,7 @@ public class MyRestController
 	}
 	
 	@GetMapping("/products/{product_id}")
-	public Products getVehiclebyNo(@PathVariable(name="product_id") String vNo)
+	public Products searchProductbyID(@PathVariable(name="product_id") String vNo)
 	{
 		return pService.searchProductbyID(vNo);
 	}
@@ -135,6 +140,31 @@ public class MyRestController
 		return bService.getallifsc();
 	}
 	
+	@GetMapping("/orders")
+	public List<Orders> getAllOrders()
+	{
+		return oService.getOrders();
+	}
 	
+	@GetMapping("/orders/{user_id}")
+	public List<Orders> getordersbyuserId(@PathVariable(name="user_id") String vNo)
+	{
+		return oService.getordersbyuserid(vNo);
+	}
+	
+	@GetMapping("/oneproduct")
+	public Products getSingleProduct() {
+		return pService.getsingleProduct();
+	}
+	
+	@GetMapping("/orders/{userid}/{prodid}")
+	public Orders getLastTransaction(@PathVariable(name = "userid") String uid, @PathVariable(name = "prodid") String pid) {
+		return oService.getlasttransaction(uid, pid);
+	}
+	
+	@PostMapping("/orders")
+	public boolean addOrder(@RequestBody Orders order) {
+		return oService.addOrder(order); 
+	}
 	
 }
