@@ -2,18 +2,20 @@ package com.app.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.app.demo.pojo.Orders;
 import com.app.demo.pojo.Products;
 import com.app.demo.pojo.Users;
 import com.app.demo.service.AddressService;
 import com.app.demo.service.BankService;
+import com.app.demo.service.OrderService;
 import com.app.demo.service.ProductsService;
 import com.app.demo.service.UserService;
 
@@ -31,6 +33,9 @@ class FinanceCasestudyApplicationTests
 	
 	@Autowired
 	ProductsService pService;
+	
+	@Autowired
+	OrderService oService;
 
 	@Test
 	public void testgetallpincodes()
@@ -103,6 +108,15 @@ class FinanceCasestudyApplicationTests
 	}
 	
 	
-	
+	@Test public void testaddOrder() {
+		  
+		  String dop = "2020-05-05";
+	  
+		  Orders o = new Orders(); o.setUser_id("user001"); o.setProd_id("P003");
+		  o.setOrder_id("84sfdhfjfd#"); o.setEmi_period(12);
+		  o.setDate_of_purchase(Date.valueOf(dop));
+		  
+		  boolean result = oService.addOrder(o); assertEquals(result, true); 
+		  }
 
 }
