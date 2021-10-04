@@ -109,12 +109,12 @@ public class MyRestController
 	}
 	
 	@PostMapping("/prodimg")
-	public boolean upload(@RequestBody Prodimage img) {
+	public boolean upload(@RequestBody MultipartFile img) {
 		String imageUploadLocation = "C:/Users/nimmana pavan/Desktop/New folder";
-		String fileName = img.getProd_img().getOriginalFilename();
+		String fileName = img.getOriginalFilename();
 		String targetFile = imageUploadLocation + fileName;
 		try {
-			FileCopyUtils.copy(img.getProd_img().getInputStream(), new FileOutputStream(targetFile));
+			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(targetFile));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;

@@ -24,6 +24,26 @@ public class Users {
 	private Date date_of_registration;
 	private String street;
 	private long pincode;
+	
+	public Users(String user_id, String name, Date dob, String email_id, long phone_no, String password,
+			String approval_status, String card_type, long account_no, String ifsc, String card_no,
+			Date date_of_registration, String street, long pincode) {
+		super();
+		this.user_id = user_id;
+		this.name = name;
+		this.dob = dob;
+		this.email_id = email_id;
+		this.phone_no = phone_no;
+		this.password = password;
+		this.approval_status = approval_status;
+		this.card_type = card_type;
+		this.account_no = account_no;
+		this.ifsc = ifsc;
+		this.card_no = card_no;
+		this.date_of_registration = date_of_registration;
+		this.street = street;
+		this.pincode = pincode;
+	}
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -12,6 +12,15 @@ public class Products {
 	private String prod_name;
 	private int price;
 	private String description;
+	
+	
+	public Products(String prod_id, String prod_name, int price, String description) {
+		super();
+		this.prod_id = prod_id;
+		this.prod_name = prod_name;
+		this.price = price;
+		this.description = description;
+	}
 	public String getProd_id() {
 		return prod_id;
 	}
